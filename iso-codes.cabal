@@ -1,0 +1,125 @@
+cabal-version:   1.12
+name:            iso-codes
+version:         0.1.0.0
+synopsis:        ISO 3166-1, ISO 4217 and ISO 639 codes.
+description:     See the <https://github.com/on-ramp/iso-codes/blob/master/README.md README>
+                   for a brief overview of what is included in this package.
+
+license:         BSD3
+license-file:    LICENSE
+author:          Oleksii Divak
+maintainer:      Oleksii Divak <frozenwitness@gmail.com>
+category:        Web
+build-type:      Simple
+
+
+source-repository head
+  type: git
+  location: https://github.com/on-ramp/iso-codes.git
+
+
+library
+  default-language: Haskell2010
+
+  ghc-options:      -Wall
+
+  hs-source-dirs:   src
+
+  exposed-modules:  Data.As
+
+                    Data.Country
+                    Data.Country.Aeson
+                    Data.Country.PostgreSQL
+                    Data.Country.Revision
+                    Data.Country.Revision.Unsafe
+                    Data.Country.Unsafe
+
+                    Data.Currency
+                    Data.Currency.Aeson
+                    Data.Currency.PostgreSQL
+                    Data.Currency.Revision
+                    Data.Currency.Revision.Unsafe
+                    Data.Currency.Unsafe
+
+                    Data.Language
+                    Data.Language.Aeson
+                    Data.Language.PostgreSQL
+                    Data.Language.Revision
+                    Data.Language.Revision.Unsafe
+                    Data.Language.Unsafe
+
+                    ISO.Country.Codes
+                    ISO.Country.Revisions
+
+                    ISO.Currency.Codes
+                    ISO.Currency.Revisions
+
+                    ISO.Language.Codes
+                    ISO.Language.Revisions
+
+  other-modules:    Data.As.Internal
+
+                    Data.Country.Codec.Internal
+                    Data.Country.Internal
+                    Data.Country.Revision.Internal
+                    Data.Country.TH.Internal
+
+                    Data.Currency.Codec.Internal
+                    Data.Currency.Internal
+                    Data.Currency.Revision.Internal
+                    Data.Currency.TH.Internal
+
+                    Data.Language.Codec.Internal
+                    Data.Language.Internal
+                    Data.Language.Revision.Internal
+                    Data.Language.TH.Internal
+
+                    ISO.Language.Codes.Internal
+
+  build-depends:    aeson             >= 1.2     && < 2.3
+                  , base              >= 4.9     && < 5
+                  , bytestring        >= 0.10    && < 0.13
+                  , containers        >= 0.6.5   && < 0.9
+                  , http-api-data     >= 0.4     && < 0.8
+                  , postgresql-simple >= 0.6     && < 0.8
+                  , scientific        >= 0.3     && < 0.4
+                  , template-haskell  >= 2.13    && < 3
+                  , text              >= 1.2     && < 2.2
+
+
+test-suite properties
+  type:             exitcode-stdio-1.0
+
+  default-language: Haskell2010
+
+  ghc-options:      -Wall
+
+  hs-source-dirs:   test
+
+  main-is:          Main.hs
+
+  other-modules:    Paths_iso_codes
+
+                    Test.Country
+                    Test.Country.Dataset
+                    Test.Country.Revision
+
+                    Test.Currency
+                    Test.Currency.Dataset
+                    Test.Currency.Revision
+
+                    Test.Language
+                    Test.Language.Dataset
+                    Test.Language.Revision
+
+  build-depends:    aeson
+                  , base
+                  , bytestring
+                  , cassava           >= 0.5     && < 0.6
+                  , filepath          >= 1.4     && < 1.6
+                  , hspec             >= 2       && < 3
+                  , http-api-data
+                  , iso-codes
+                  , postgresql-simple
+                  , text
+                  , xml-conduit       >= 1.9     && < 1.11

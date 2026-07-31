@@ -1,0 +1,76 @@
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: cimg/base:current-22.04
+
+    parameters:
+      cabal:
+        type: string
+      ghc:
+        type: string
+
+    steps:
+      - checkout
+ 
+      - restore_cache:
+          name: Restore
+          key: linux-<< parameters.ghc >>-{{ checksum "iso-codes.cabal" }}
+
+      - run:
+          name: Install libraries
+          command: |
+            sudo apt-get update
+            sudo apt-get install -y build-essential curl libffi-dev libffi8ubuntu1 libgmp-dev libgmp10 libncurses-dev libncurses5 libtinfo5
+
+      - run:
+          name: Install GHC
+          command: |
+            curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | BOOTSTRAP_HASKELL_NONINTERACTIVE=1 BOOTSTRAP_HASKELL_MINIMAL=1 sh
+
+            source ~/.ghcup/env
+            echo 'source ~/.ghcup/env' >> $BASH_ENV
+
+            ghcup install cabal << parameters.cabal >>
+            ghcup set cabal << parameters.cabal >>
+
+            ghcup install ghc << parameters.ghc >>
+            ghcup set ghc << parameters.ghc >>
+
+      - run:
+          name: Update Dependencies
+          command: cabal new-update
+
+      - run:
+          name: Build
+          command: cabal new-build all --enable-tests
+
+      - save_cache:
+          name: Cache
+          key: linux-<< parameters.ghc >>-{{ checksum "iso-codes.cabal" }}
+          paths:
+            - ~/.config/cabal
+            - ~/.cache/cabal
+            - ~/.local/state/cabal
+            - ~/.ghcup
+            - dist-newstyle
+
+      - run:
+          name: Test
+          command: cabal new-test iso-codes:test:properties
+
+
+
+workflows:
+  workflow:
+    jobs:
+      - build:
+          name: linux-9.10.3
+          cabal: 3.16.0.0
+          ghc: 9.10.3
+
+      - build:
+          name: linux-8.10.7
+          cabal: 3.16.0.0
+          ghc: 8.10.7
