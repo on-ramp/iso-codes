@@ -48,6 +48,9 @@ instance Show (As "alpha-2" Country) where
 instance Eq (As "alpha-2" Country) where
   (==) = (==) `on` Country.getAlpha2 . unAs
 
+instance Ord (As "alpha-2" Country) where
+  compare = compare `on` Country.getAlpha2 . unAs
+
 instance ToJSON (As "alpha-2" Country) where
   toJSON = Country.Aeson.toAlpha2 . unAs
 
@@ -73,6 +76,9 @@ instance Show (As "alpha-3" Country) where
 
 instance Eq (As "alpha-3" Country) where
   (==) = (==) `on` Country.getAlpha3 . unAs
+
+instance Ord (As "alpha-3" Country) where
+  compare = compare `on` Country.getAlpha3 . unAs
 
 instance ToJSON (As "alpha-3" Country) where
   toJSON = Country.Aeson.toAlpha3 . unAs
@@ -100,6 +106,9 @@ instance Show (As "numeric" Country) where
 instance Eq (As "numeric" Country) where
   (==) = (==) `on` Country.getNumeric . unAs
 
+instance Ord (As "numeric" Country) where
+  compare = compare `on` Country.getNumeric . unAs
+
 instance ToJSON (As "numeric" Country) where
   toJSON = Country.Aeson.toNumeric . unAs
 
@@ -126,6 +135,9 @@ instance Show (As "alpha" Currency) where
 instance Eq (As "alpha" Currency) where
   (==) = (==) `on` Currency.getAlpha . unAs
 
+instance Ord (As "alpha" Currency) where
+  compare = compare `on` Currency.getAlpha . unAs
+
 instance ToJSON (As "alpha" Currency) where
   toJSON = Currency.Aeson.toAlpha . unAs
 
@@ -151,6 +163,9 @@ instance Show (As "numeric" Currency) where
 
 instance Eq (As "numeric" Currency) where
   (==) = (==) `on` Currency.getNumeric . unAs
+
+instance Ord (As "numeric" Currency) where
+  compare = compare `on` Currency.getNumeric . unAs
 
 instance ToJSON (As "numeric" Currency) where
   toJSON = Currency.Aeson.toNumeric . unAs
@@ -203,6 +218,9 @@ instance Show (As "alpha-3" Language) where
 
 instance Eq (As "alpha-3" Language) where
   (==) = (==) `on` Language.getAlpha3 . unAs
+
+instance Ord (As "alpha-3" Language) where
+  compare = compare `on` Language.getAlpha3 . unAs
 
 instance ToJSON (As "alpha-3" Language) where
   toJSON = Language.Aeson.toAlpha3 . unAs

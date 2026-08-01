@@ -66,6 +66,11 @@ instance Show Currency where
 -- | Full equality of internal representation.
 deriving instance Eq Currency
 
+-- | Ordering over internal representation.
+--
+--   There is no guarantee this order will stay consistent between library versions.
+deriving instance Ord Currency
+
 
 
 -- | Construct a t'Currency' out of its two ISO 4217 representations and digit count.
@@ -107,7 +112,7 @@ isDigit w = w >= 0x30 && w <= 0x39
 -- | Alpha code.
 data Alpha = -- | Stored as ASCII codepoints.
              Alpha {-# UNPACK #-} !Word8 {-# UNPACK #-} !Word8 {-# UNPACK #-} !Word8
-             deriving Eq
+             deriving (Eq, Ord)
 
 
 -- | Extract currency's alpha code.
@@ -166,7 +171,7 @@ alphaToKey (Alpha a b c) =
 -- | Numeric code.
 data Numeric = -- | Stored as ASCII codepoints.
                Numeric {-# UNPACK #-} !Word8 {-# UNPACK #-} !Word8 {-# UNPACK #-} !Word8
-               deriving Eq
+               deriving (Eq, Ord)
 
 
 -- | Extract currency's numeric code.

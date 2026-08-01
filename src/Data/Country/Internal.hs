@@ -64,6 +64,11 @@ instance Show Country where
 -- | Full equality of internal representation.
 deriving instance Eq Country
 
+-- | Ordering over internal representation.
+--
+--   There is no guarantee this order will stay consistent between library versions.
+deriving instance Ord Country
+
 
 
 -- | Construct a t'Country' out of its three ISO 3166-1 representations.
@@ -105,7 +110,7 @@ isDigit w = w >= 0x30 && w <= 0x39
 -- | Alpha-2 code.
 data Alpha2 = -- | Stored as ASCII codepoints.
               Alpha2 {-# UNPACK #-} !Word8 {-# UNPACK #-} !Word8
-              deriving Eq
+              deriving (Eq, Ord)
 
 
 -- | Extract country's alpha-2 code.
@@ -159,7 +164,7 @@ alpha2ToKey (Alpha2 a b) =
 -- | Alpha-3 code.
 data Alpha3 = -- | Stored as ASCII codepoints.
               Alpha3 {-# UNPACK #-} !Word8 {-# UNPACK #-} !Word8 {-# UNPACK #-} !Word8
-              deriving Eq
+              deriving (Eq, Ord)
 
 
 -- | Extract country's alpha-3 code.
@@ -218,7 +223,7 @@ alpha3ToKey (Alpha3 a b c) =
 -- | Numeric code.
 data Numeric = -- | Stored as ASCII codepoints.
                Numeric {-# UNPACK #-} !Word8 {-# UNPACK #-} !Word8 {-# UNPACK #-} !Word8
-               deriving Eq
+               deriving (Eq, Ord)
 
 
 -- | Extract country's numeric code.

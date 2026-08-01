@@ -61,6 +61,11 @@ instance Show Language where
 -- | Full equality of internal representation.
 deriving instance Eq Language
 
+-- | Ordering over internal representation.
+--
+--   There is no guarantee this order will stay consistent between library versions.
+deriving instance Ord Language
+
 
 
 -- | Construct a t'Language' out of its two ISO 639 representations.
@@ -104,7 +109,7 @@ isAlpha w = w >= 0x61 && w <= 0x7A
 -- | Alpha-2 code.
 data Alpha2 = -- | Stored as ASCII codepoints.
               Alpha2 {-# UNPACK #-} !Word8 {-# UNPACK #-} !Word8
-              deriving Eq
+              deriving (Eq, Ord)
 
 
 -- | Extract language's alpha-2 code (if available).
@@ -160,7 +165,7 @@ alpha2ToKey (Alpha2 a b) =
 -- | Alpha-3 code.
 data Alpha3 = -- | Stored as ASCII codepoints.
               Alpha3 {-# UNPACK #-} !Word8 {-# UNPACK #-} !Word8 {-# UNPACK #-} !Word8
-              deriving Eq
+              deriving (Eq, Ord)
 
 
 -- | Extract language's alpha-3 code.

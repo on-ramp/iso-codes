@@ -1,6 +1,6 @@
 cabal-version:   1.12
 name:            iso-codes
-version:         0.1.0.0
+version:         0.1.1.0
 synopsis:        ISO 3166-1, ISO 4217 and ISO 639 codes.
 description:     See the <https://github.com/on-ramp/iso-codes/blob/master/README.md README>
                    for a brief overview of what is included in this package.
@@ -11,6 +11,8 @@ author:          Oleksii Divak
 maintainer:      Oleksii Divak <frozenwitness@gmail.com>
 category:        Web
 build-type:      Simple
+extra-source-files:
+  CHANGELOG.md
 
 
 source-repository head
