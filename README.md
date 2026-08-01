@@ -1,4 +1,5 @@
 # iso-codes
+[![docs](https://img.shields.io/github/actions/workflow/status/on-ramp/iso-codes/pages/pages-build-deployment?logo=github&label=docs)](https://on-ramp.github.io/iso-codes/)
 
 
 A Haskell library for handling ISO 3166-1 country codes, ISO 4217 currency codes and
